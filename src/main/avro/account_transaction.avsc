@@ -14,7 +14,7 @@
     {
       "name": "typeTransaction",
       "type": {
-        "name": "enumValues",
+        "name": "TransactionType",
         "type": "enum",
         "symbols": [
           "DEBIT",

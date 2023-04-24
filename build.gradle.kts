@@ -14,6 +14,11 @@ java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
 	mavenCentral()
+	maven(url = "https://packages.confluent.io/maven/")
+}
+
+java.sourceSets["main"].java {
+	srcDir("build/generated-main-avro-java/")
 }
 
 dependencies {
@@ -22,6 +27,7 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.springframework.kafka:spring-kafka")
 	implementation("org.apache.avro:avro:1.11.1")
+	implementation("io.confluent:kafka-avro-serializer:7.3.3")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.kafka:spring-kafka-test")

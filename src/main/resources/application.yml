@@ -1,3 +1,6 @@
 kafka:
   topic: test
   brokers: localhost:9092
+
+server:
+  port: 9091

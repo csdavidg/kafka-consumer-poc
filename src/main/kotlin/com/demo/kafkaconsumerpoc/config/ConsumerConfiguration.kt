@@ -1,5 +1,7 @@
 package com.demo.kafkaconsumerpoc.config
 
+import com.demo.kafkaconsumerpoc.avro.AccountTransaction
+import io.confluent.kafka.serializers.KafkaAvroDeserializer
 import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.kafka.clients.consumer.RoundRobinAssignor
 import org.apache.kafka.common.serialization.StringDeserializer
@@ -24,6 +26,7 @@ class ConsumerConfiguration {
             ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG to StringDeserializer::class.java,
             ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG to KafkaAvroDeserializer::class.java,
             ConsumerConfig.GROUP_ID_CONFIG to "firstGroup",
+            "schema.registry.url" to "http://localhost:8081"
             //ConsumerConfig.PARTITION_ASSIGNMENT_STRATEGY_CONFIG to RoundRobinAssignor::class.java
         )
 
@@ -31,8 +34,8 @@ class ConsumerConfiguration {
     }
 
     @Bean
-    fun kafkaListenerContainerFactory(): ConcurrentKafkaListenerContainerFactory<String, Any> {
-        return ConcurrentKafkaListenerContainerFactory<String, Any>().apply {
+    fun kafkaListenerContainerFactory(): ConcurrentKafkaListenerContainerFactory<String, AccountTransaction> {
+        return ConcurrentKafkaListenerContainerFactory<String, AccountTransaction>().apply {
             consumerFactory = consumerFactory()
 
         }
